@@ -1,0 +1,42 @@
+{
+  "name": "seasonly-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@headlessui/react": "^2.0.4",
+    "@stripe/react-stripe-js": "^2.7.1",
+    "@stripe/stripe-js": "^3.4.1",
+    "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.2",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "formik": "^2.4.5",
+    "icons": "^1.0.0",
+    "next": "14.1.4",
+    "react": "^18.2.0",
+    "react-big-calendar": "^1.12.2",
+    "react-bootstrap": "^2.10.2",
+    "react-bootstrap-icons": "^1.11.3",
+    "react-calendar": "^4.8.0",
+    "react-dom": "^18",
+    "react-file-base64": "^1.0.3",
+    "react-icons": "^5.1.0",
+    "react-toastify": "^10.0.5",
+    "react-tooltip": "^5.26.3",
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.7.5",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
+  }
+}

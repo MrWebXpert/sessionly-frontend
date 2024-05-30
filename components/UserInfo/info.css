@@ -1,0 +1,39 @@
+
+.msg-sec{
+    background-color:#fff;
+    border-radius: 10px;
+    border-radius: 2px solid #fff;
+    box-shadow: 0 0 10px #fff;
+    /* width: 40%; */
+    padding: 2rem 2rem;
+    
+}
+.noti{
+   margin: 20px 0 ;
+    display: flex;
+}
+
+.logo img{
+    border-radius: 100px;
+
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.msg-sec h1 {
+    color: black;
+}
+.msg-sec p{
+    color: black;
+}
+.msg-para{
+    margin-bottom: 4rem;
+}
+.para-name{
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 700;
+}

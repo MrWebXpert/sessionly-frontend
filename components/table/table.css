@@ -1,0 +1,45 @@
+custom-table {
+   
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table td {
+  
+    border-bottom: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+ .custom-table th {
+    background-color: #10B981;
+    color: white;
+} 
+
+.custom-table img {
+    max-width: 40px;
+    border-radius: 40px;
+    display: block;
+  }
+
+.custom-table th {
+    /* text-align: center; */
+    /* padding: 7px; */
+
+}
+.table-body tr:nth-child(odd){
+    background-color: rgb(224, 217, 217);
+}
+
+
+.experts:nth-child(odd) td span{
+    background-color: rgb(212, 186, 138);
+} 
+
+.experts:nth-child(even) td span{
+    background-color: rgb(157, 186, 241);
+} 
+
+.table-body tr{
+    /* background-color: darkgreen; */
+    border-radius: 20px;
+}

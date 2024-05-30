@@ -1,0 +1,55 @@
+.dropdown-menu-component {
+    position: absolute;
+    top: 100%;
+    right: -200px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 300px;
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+.profileImage-component {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1rem 1rem 1rem;
+    border-bottom: 1px solid gray;
+}
+
+.messageImage {
+    width: 60px;
+    height: 60px;
+}
+
+.messageImage img {
+    width: 100%;
+    border-radius: 100%;
+}
+
+.content {
+    color: black;
+}
+
+
+.content p {
+    font: 5px !important;
+}
+
+/* .profileImage {
+    display: flex;
+} */
+
+.heading {
+    color: black;
+    text-align: center;
+    padding: 1rem 0;
+    /* border-bottom: 2px solid #10b981; */
+    background-color: #10b981;
+    color: white;
+    font-weight: bold;
+}

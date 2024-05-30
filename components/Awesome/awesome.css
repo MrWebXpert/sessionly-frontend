@@ -1,0 +1,115 @@
+body{
+    background-color: #f8f9fa;
+}
+h1{
+    font-family: sans-serif;
+}
+p{
+    font-family: sans-serif;
+    font-weight:400;
+}
+.cards{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.card-04{
+    background-color: rgba(255,188,52,1);
+    border-radius: 10px ;
+    border: 2px solid  rgba(255,188,52,1) ;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+     padding: 2rem 5rem;
+}
+.card-03{
+    
+    background-color: rgba(57, 196, 73, 1);
+    border-radius: 10px;
+    border: 2px solid  rgba(57, 196, 73, 1) ;
+     padding: 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+.card-02{
+    background-color:  rgba(96,77,207,1);
+    border: 2px solid rgba(96,77,207,1) ;
+    border-radius: 10px;
+     padding: 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+.card-01{
+    background-color: rgba(0,158,251,1);
+    border: 2px solid  rgba(0,158,251,1) ;
+    border-radius: 10px;
+    padding: 2rem 5rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+.cards h1{
+    color: #fff;
+}
+.cards p{
+    color: #f8f9fa;
+}
+.section{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(226, 201, 168);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    margin-top: 20px;
+}
+.msg-sec{
+    background-color:#fff;
+    border-radius: 10px;
+    border-radius: 2px solid #fff;
+    box-shadow: 0 0 10px #fff;
+    /* width: 40%; */
+    padding: 1rem 4rem;
+    
+}
+.noti{
+   margin: 20px 0 ;
+    display: flex;
+}
+
+.logo img{
+    border-radius: 100px;
+
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+.msg-sec h1 {
+    color: black;
+}
+.msg-sec p{
+    color: black;
+}
+.msg-para{
+    margin-bottom: 4rem;
+}
+.para-name{
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 700;
+}
+.section-2{
+    display: flex;
+    justify-content: space-around;
+    
+}

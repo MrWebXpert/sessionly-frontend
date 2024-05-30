@@ -1,0 +1,128 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #10b981;
+    padding: .7rem 0;
+}
+
+.leftSide {
+    display: flex;
+    margin-left: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.leftSide .icon {
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    position: relative;
+}
+
+.iconStyling {
+    height: 25px;
+    width: 25px;
+}
+
+
+.about {
+    margin: 0 0.5rem;
+}
+
+.about a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: white;
+}
+
+
+.rightSide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search input {
+    padding: .6rem 2rem;
+    border-radius: 20px;
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.image img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    border-radius: 100%;
+    margin-right: 1rem;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 300px;
+}
+
+.profileImage {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.8rem 1rem 1.8rem 1rem;
+    border-bottom: 1px solid gray;
+}
+
+.iconofProfile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+}
+
+.iconofProfile span {
+    font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconofProfile p {
+    font-size: 1rem;
+
+}
+
+#border {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+
+#button button {
+    padding: .5rem 1.5rem;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
