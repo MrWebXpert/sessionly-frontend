@@ -79,7 +79,7 @@ const SignupForm = () => {
                                         </h1>
                                         <form className="mt-10" onSubmit={handleSubmitLogin}>
                                             <div className="relative">
-                                                <div className="relative mt-10">
+                                                <div className="relative mt-5">
                                                     <BaseInput
                                                         // id="email"
                                                         name="email"
@@ -91,8 +91,8 @@ const SignupForm = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="relative mt-10">
-                                                <div className="relative mt-10">
+                                            <div className="relative mt-3">
+                                                <div className="relative mt-3">
                                                     <BaseInput
                                                         // id="password"
                                                         name="password"

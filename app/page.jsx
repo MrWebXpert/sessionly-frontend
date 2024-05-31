@@ -8,6 +8,7 @@ import PromptComponent from '@/components/Slide'
 import Navbar from '@/components/Navbar'
 import FooterSection from '@/components/Footer'
 import Expertlisting from './Expertlisting/page'
+import Testimonial from '@/components/testinomial'
 
 const Page = () => {
   const [user, setUser] = useState(null)
@@ -90,6 +91,7 @@ const Page = () => {
       <Expertlisting />
       <PromptComponent />
       <HoItWork />
+      <Testimonial />
       <FooterSection />
     </>
   )

@@ -37,7 +37,7 @@ const VideoCallPage = ({ params }) => {
 
         socket.current.on("roomCreated", ({ roomId, roomKey }) => {
             console.log(`Room created with ID: ${roomId} and Key: ${roomKey}`);
-            router.push(`/video-call/${roomId} / ${roomKey}`);
+            router.push(`/video-call/${roomId}/${roomKey}`);
         });
 
         socket.current.on("roomError", (message) => {
@@ -119,6 +119,23 @@ const VideoCallPage = ({ params }) => {
         } else {
             alert("Invalid room key");
         }
+    };
+
+    const handleEndCall = () => {
+        // Destroy all peers
+        peersRef.current.forEach(({ peer }) => peer.destroy());
+        setPeers([]);
+
+        // Close user media stream
+        if (stream) {
+            stream.getTracks().forEach((track) => track.stop());
+        }
+
+        // Disconnect socket
+        socket.current.disconnect();
+
+        // Redirect to home or another page
+        router.push("/dashboard/session");
     };
 
     function createPeer(userToSignal, callerID, stream) {
@@ -210,8 +227,8 @@ const VideoCallPage = ({ params }) => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 video-container ">
-            <div className="w-full max-w-4xl p-4 bg-white rounded shadow-md ">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 video-container">
+            <div className="w-full max-w-4xl p-4 bg-white rounded shadow-md">
                 <video
                     ref={userVideo}
                     autoPlay
@@ -219,9 +236,7 @@ const VideoCallPage = ({ params }) => {
                     muted
                     className="w-full mb-4 rounded-lg own-video"
                 />
-                <div
-                    className="grid grid-cols-2 gap-4 "
-                >
+                <div className="grid grid-cols-2 gap-4">
                     {peers.map(({ peerID, stream }) => (
                         <Video
                             key={peerID}
@@ -230,6 +245,12 @@ const VideoCallPage = ({ params }) => {
                         />
                     ))}
                 </div>
+                <button
+                    onClick={handleEndCall}
+                    className="w-full px-4 py-2 mt-4 text-white bg-red-500 rounded hover:bg-red-700"
+                >
+                    End Call
+                </button>
             </div>
         </div>
     );
