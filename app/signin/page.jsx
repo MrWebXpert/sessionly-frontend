@@ -41,7 +41,8 @@ const SignupForm = () => {
                 localStorage.setItem("id", response.data.id);
                 localStorage.setItem("profile", response.data.profile);
                 localStorage.setItem("email", response.data.email);
-                router.push("/dashboard");
+                // router.push("/dashboard");
+                router.push(`/dashboard/${response.data.userType}`)
 
                 toast.success("You logged In");
 
@@ -103,17 +104,18 @@ const SignupForm = () => {
                                                     />
                                                 </div>
                                             </div>
+                                            <a
+                                                href="/sendmail"
+                                                className="block text-sm font-medium text-center text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                            >
+                                                Forgot your password?
+                                            </a>
 
                                             <div className="flex justify-center">
                                                 <BaseButton type="submit" label="Sign in" />
                                             </div>
                                         </form>
-                                        <a
-                                            href="#"
-                                            className="block mb-4 text-sm font-medium text-center text-indigo-600 hover:underline focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                        >
-                                            Forgot your password?
-                                        </a>
+
                                     </div>
                                 </div>
                             </div>

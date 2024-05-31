@@ -1,112 +1,93 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { FaRegEdit } from "react-icons/fa";
-import { AiOutlineDelete } from "react-icons/ai";
 
 import { useRouter } from "next/navigation";
-import { useEffectAsync } from "@/utils/react";
-import { toast } from "react-toastify";
-import Link from "next/link";
-import TaskApi from "@/app/api/task";
 import axios from "axios";
 
 const page = () => {
-  const [task, setTask] = useState([]);
-  const [data, setData] = useState(null)
   const router = useRouter();
-  // const onDeleteClick = async (taskId) => {
-  //   const taskApi = new TaskApi();
-  //   try {
-  //     await taskApi.remove(taskId);
-  //     setTask(task.filter((v) => v._id != taskId));
-  //     toast.success("Task Removed Successfully");
-  //   } catch (error) {
-  //     toast.error("Something went wrong");
-  //   }
-  // };
-  // useEffectAsync(async () => {
-  //   try {
-  //     const taskApi = new taskApi();
-  //     const data = await taskApi.list();
-  //     console.log("task data list", data.data);
-  //     setTask(data.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }, []);
 
-  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/tasks/all`;
-  const fetchData = async () => {
-    const res = await fetch(url);
-    const data = await res.json()
-    setTask(data.tasks)
-    console.log(task)
-  }
+  const [students, setStudents] = useState([]);
+  const [experts, setExperts] = useState([])
+
   useEffect(() => {
-    fetchData();
+    const handleUserData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/student/all`
+        );
+        setStudents(response.data.data);
+        // console.log(response.data.data)
+      } catch (error) {
+        console.error("Error fetching the student data", error);
+      }
+    };
+
+    handleUserData();
+  }, []);
+  useEffect(() => {
+    const handleExpertData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/staff/all`
+        );
+        setExperts(response.data.data);
+        console.log("userdata in the console: ", response.data.data)
+      } catch (error) {
+        console.error("Error fetching the student data", error);
+      }
+    };
+
+    handleExpertData();
+
+
   }, [])
+
+
   return (
     <>
-      <div className="flex justify-end">
-        <button
-          className="m-4 py-1 px-2 rounded bg-[#10b981] text-white"
-          onClick={() => router.push("/dashboard/task/create")}
-        >
-          Add Task
-        </button>
+      <div className="flex items-center justify-center h-screen mt-5 Box">
+        {/* <div className="box w-[190px] h-[100px] shadow-xl rounded-xl bg-slate-300">
+          <h1 className="px-3 mt-3 font-bold ">Number of Experts</h1>
+          <h3 className="px-3 font-semibold">{experts.length}</h3>
+        </div>
+        <div className="box w-[190px] h-[100px] shadow-xl rounded-xl bg-slate-300">
+          <h1 className="px-3 mt-3 font-bold ">Number of Students</h1>
+          <h3 className="px-3 font-semibold">{students.length}</h3>
+        </div> */}
+        <div className="relative w-56 ml-10 overflow-hidden duration-700 cursor-pointer  group text-gray-50 h-72 rounded-2xl hover:duration-700">
+          <div className="w-56 text-gray-800 h-72 bg-lime-400">
+            <div className="flex justify-center h-full pt-10 text-6xl font-bold">
+              {experts ? experts.length : "0"}
+            </div>
+          </div>
+          <div className="absolute flex flex-col w-56 gap-1 p-3 duration-500 bg-gray-50 -bottom-24 group-hover:-bottom-0 group-hover:duration-600">
+            <span className="text-3xl font-bold text-gray-800">Experts</span>
+            <p className="text-neutral-800">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+          </div>
+
+
+
+
+        </div>
+        <div className="relative w-56 ml-10 overflow-hidden duration-700 cursor-pointer  group text-gray-50 h-72 rounded-2xl hover:duration-700">
+          <div className="w-56 text-gray-800 h-72 bg-lime-400">
+            <div className="flex justify-center h-full pt-10 text-6xl font-bold">
+              {students ? students.length : "0"}
+            </div>
+          </div>
+          <div className="absolute flex flex-col w-56 gap-1 p-3 duration-500 bg-gray-50 -bottom-24 group-hover:-bottom-0 group-hover:duration-600">
+            <span className="text-3xl font-bold text-gray-800">Students</span>
+            <p className="text-neutral-800">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+          </div>
+
+
+
+
+        </div>
       </div>
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="text-lg bg-[#10b981] text-white text-left">
-            <th>S.No</th>
-            {/* <th>Category Image</th> */}
-            <th>Username</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>User Type</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {task.map((task, index) => (
-            <tr className="border-b border-gray-300 bg-slate-50" key={index}>
-              <td className="text-center">{index + 1}</td>
-              {/* <td>
-                <img
-                                    src={admin.categoryImage}
-                                    alt={item.categoryName}
-                                    className="rounded-full max-w-10"
-                                />
-              </td> */}
-              <td>{task.title}</td>
-              <td>{task.description}</td>
-              <td>{task.complated}</td>
-              <td>{task.dueDate}</td>
-              <td>{task.assignedTo}</td>
-              {/* <td>{task.assignedToElse}</td> */}
-              {/* <td>{task.assignedBy}</td> */}
-              {/* <td>{task.imestamps}</td> */}
-              <td>
-                <Link
-                  href={`/dashboard/task/${task._id}/edit`}
-                  className="p-2 text-center"
-                >
-                  <span className="flex text-xl text-black rounded-md ">
-                    <FaRegEdit />
-
-                    <AiOutlineDelete
-                      onClick={() => onDeleteClick(task._id)}
-                      className="ml-2 text-xl"
-                    />
-                  </span>
-                </Link>
-                {/* <button onClick={() => onDeleteClick(task._id)}>Delete</button> */}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </>
   );
 };

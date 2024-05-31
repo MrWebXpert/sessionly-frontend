@@ -34,12 +34,12 @@ const Sidebar = () => {
                     { name: "transection", href: "/dashboard/experts", icon: TiContacts },
                     // { name: "Courses", href: "/dashboard/course", icon: IoCreate },
                     // { name: "Task", href: "/dashboard/task", icon: FaTasks },
-                    { name: "Transaction", href: "/dashboard/courseBooking", icon: FaBook },
+                    { name: "BookedSessions", href: "/dashboard/courseBooking", icon: FaBook },
                     { name: "Profile", href: "/dashboard/admin/profile", icon: CgProfile },
 
                     // Add other admin sidebar items here
                 ];
-            } else if (userType === "staff") {
+            } else if (userType === "experts") {
                 items = [
                     { name: "transection", href: "/dashboard/experts", icon: FiMail },
                     { name: "Session", href: "/dashboard/session", icon: TiContacts },

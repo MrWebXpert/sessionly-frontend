@@ -96,8 +96,12 @@ const VideoCallPage = ({ params }) => {
                     const peerObj = peersRef.current.find((p) => p.peerID === userID);
                     if (peerObj) {
                         peerObj.peer.destroy();
-                        peersRef.current = peersRef.current.filter((p) => p.peerID !== userID);
-                        setPeers((prevPeers) => prevPeers.filter((p) => p.peerID !== userID));
+                        peersRef.current = peersRef.current.filter(
+                            (p) => p.peerID !== userID
+                        );
+                        setPeers((prevPeers) =>
+                            prevPeers.filter((p) => p.peerID !== userID)
+                        );
                     }
                 });
             })
@@ -163,7 +167,9 @@ const VideoCallPage = ({ params }) => {
 
         peer.on("close", () => {
             peersRef.current = peersRef.current.filter((p) => p.peerID !== callerID);
-            setPeers((prevPeers) => prevPeers.filter((user) => user.peerID !== callerID));
+            setPeers((prevPeers) =>
+                prevPeers.filter((user) => user.peerID !== callerID)
+            );
         });
 
         peer.signal(incomingSignal);
@@ -173,29 +179,57 @@ const VideoCallPage = ({ params }) => {
 
     if (!isRoomKeyValid) {
         return (
-            <div className="room-key-form">
-                <form onSubmit={handleRoomKeySubmit}>
-                    <label htmlFor="roomKey">Enter Room Key:</label>
+            <div className="flex items-center justify-center h-screen bg-gray-100 room-key-form">
+                <form
+                    onSubmit={handleRoomKeySubmit}
+                    className="p-6 bg-white rounded shadow-md"
+                >
+                    <label
+                        htmlFor="roomKey"
+                        className="block mb-2 text-lg font-medium text-gray-700"
+                    >
+                        Enter Room Key:
+                    </label>
                     <input
                         type="text"
                         id="roomKey"
                         value={enteredRoomKey}
                         onChange={(e) => setEnteredRoomKey(e.target.value)}
                         required
+                        className="w-full p-2 mb-4 border border-gray-300 rounded"
                     />
-                    <button type="submit">Join Room</button>
+                    <button
+                        className="w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700"
+                        type="submit"
+                    >
+                        Join Room
+                    </button>
                 </form>
             </div>
         );
     }
 
     return (
-        <div className="video-container">
-            <video ref={userVideo} autoPlay playsInline muted className="own-video" />
-            <div className="flex flex-wrap justify-center">
-                {peers.map(({ peerID, stream }) => (
-                    <Video key={peerID} stream={stream} className="peer-video" />
-                ))}
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 video-container ">
+            <div className="w-full max-w-4xl p-4 bg-white rounded shadow-md ">
+                <video
+                    ref={userVideo}
+                    autoPlay
+                    playsInline
+                    muted
+                    className="w-full mb-4 rounded-lg own-video"
+                />
+                <div
+                    className="grid grid-cols-2 gap-4 "
+                >
+                    {peers.map(({ peerID, stream }) => (
+                        <Video
+                            key={peerID}
+                            stream={stream}
+                            className="w-full h-64 rounded-lg shadow peer-video"
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );
@@ -210,7 +244,14 @@ const Video = ({ stream }) => {
         }
     }, [stream]);
 
-    return <video ref={ref} autoPlay playsInline className="w-screen" />;
+    return (
+        <video
+            ref={ref}
+            autoPlay
+            playsInline
+            className="w-full h-full rounded-lg"
+        />
+    );
 };
 
 export default VideoCallPage;

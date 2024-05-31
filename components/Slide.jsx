@@ -304,7 +304,7 @@ export default function Home() {
   return (
     <div>
       <Header setSelectedComponent={setSelectedComponent} />
-      <main className="p-8 bg-[#F3F4F6] min-h-screen ">
+      <main className="p-8 bg-[#F3F4F6] h-fix ">
         <section className="grid grid-cols-1 px-28 lg:grid-cols-3 ">
           {/* Left side impressive card */}
           <div className="flex flex-col items-center bg-transparent rounded-lg shadow lg:col-span-1 w-80">

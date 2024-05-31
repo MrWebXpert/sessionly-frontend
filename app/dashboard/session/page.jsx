@@ -63,7 +63,7 @@ const Student = () => {
                                         Price
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
-                                        Action
+                                        Image
                                     </th>
                                 </tr>
                             </thead>
@@ -98,9 +98,10 @@ const Student = () => {
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap w-[11%]">
                                                 {session.sessionPrice}
+
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap w-[11%]">
-                                                <TbEdit />
+                                                <img src={session.image} alt="session image" />
                                             </td>
                                         </tr>
                                     </tbody>

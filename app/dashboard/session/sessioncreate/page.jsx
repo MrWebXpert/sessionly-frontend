@@ -8,6 +8,7 @@ const Page = () => {
     const [mainCategory, setMainCategory] = useState("");
     const [subCategories, setSubCategories] = useState([]);
     const [expertId, setExpertId] = useState("");
+    const [avatar, setAvatar] = useState(null)
 
     useEffect(() => {
         const ExpertId = localStorage.getItem("id");
@@ -33,6 +34,7 @@ const Page = () => {
     const router = useRouter();
     const [formData, setFormData] = useState({
         title: "",
+        description: "",
         duration: "",
         sessionPrice: "",
         category: "",
@@ -44,12 +46,29 @@ const Page = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const handleFileChange = (e) => {
+        const uploadImage = e.target.files && e.target.files[0]
+        if (uploadImage) {
+            setAvatar(uploadImage)
+        }
+
+    };
+
     const createSession = async (e) => {
         e.preventDefault();
+        const fileData = new FormData()
+
+        fileData.append("image", avatar || "")
+        fileData.append("title", formData.title)
+        fileData.append("description", formData.description)
+        fileData.append("duration", formData.duration)
+        fileData.append("sessionPrice", formData.sessionPrice)
+        fileData.append("category", formData.category)
+        fileData.append('subCategory', formData.subCategory)
         try {
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/course/register/${expertId}`,
-                formData
+                fileData
             );
             console.log(response);
 
@@ -88,6 +107,26 @@ const Page = () => {
                         value={formData.title}
                         onChange={handleChange}
                     />
+                </div>
+                <div className="w-1/2 mb-6">
+                    <label
+                        className="block mb-1 font-bold text-gray-500"
+                        htmlFor="inline-full-name"
+                    >
+                        Session Details
+                    </label>
+                    <textarea
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#10b981]"
+                        id="inline-full-name"
+                        rows={5}
+                        cols={5}
+                        name="description"
+                        placeholder="Enter Seesion description Here"
+
+
+                        value={formData.description}
+                        onChange={handleChange}
+                    ></textarea>
                 </div>
 
                 <div className="w-1/2 mb-6">
@@ -173,6 +212,22 @@ const Page = () => {
                         required
                         value={formData.sessionPrice}
                         onChange={handleChange}
+                    />
+                </div>
+                <div className="w-1/2 mb-6">
+                    <label
+                        className="block mb-1 font-bold text-gray-500"
+                        htmlFor="inline-full-name"
+                    >
+                        Upload your image:
+                    </label>
+                    <input
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#10b981]"
+                        id="file"
+                        type="file"
+                        name="file"
+
+                        onChange={handleFileChange}
                     />
                 </div>
 

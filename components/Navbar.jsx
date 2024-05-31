@@ -49,7 +49,7 @@ const Navbar = () => {
 
                     <div className="flex justify-end flex-1">
                         <div className="hidden p-2 mr-2 cursor-pointer lg:inline-block">
-                            <div className="small-secondary text-gray2 hover:text-gray1" data-cy="hp-menu-teachers" onClick={() => { router.push('/Expertlisting') }}>Find an Expert</div>
+                            <div className="small-secondary text-gray2 hover:text-gray1" data-cy="hp-menu-teachers" onClick={() => { router.push('/ExpertPage') }}>Find an Expert</div>
                         </div>
                         <a className="hidden p-2 mr-2 lg:inline-block" href="/experts">
                             <div className="small-secondary text-gray2 hover:text-gray1" data-cy="hp-menu-application">Become an Expert</div>

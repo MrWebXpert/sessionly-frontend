@@ -86,10 +86,10 @@ const Page = () => {
           </picture>
         </div>
       </div>
-      <ExpertBox />
+      {/* <ExpertBox /> */}
+      <Expertlisting />
       <PromptComponent />
       <HoItWork />
-      <Expertlisting />
       <FooterSection />
     </>
   )
