@@ -1,84 +1,118 @@
 "use client";
-import React, { useState } from "react";
-import { FaRegEdit } from "react-icons/fa";
-import { AiOutlineDelete } from "react-icons/ai";
-
+import React, { useEffect, useState } from "react";
+import { TbEdit } from "react-icons/tb";
+import Table from "@/components/table/table";
 import { useRouter } from "next/navigation";
-import { useEffectAsync } from "@/utils/react";
-import { toast } from "react-toastify";
-import Link from "next/link";
-import AdminApi from "@/app/api/admin";
-
+import axios from "axios";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
+import { toast } from "react-toastify";
 
-const page = () => {
-  const [admins, setAdmins] = useState([]);
+const Student = () => {
   const router = useRouter();
-  // const onDeleteClick = async (adminId) => {
-  //   const adminApi = new AdminApi();
-  //   try {
-  //     await adminApi.remove(adminId);
-  //     setAdmins(admins.filter((v) => v._id != adminId));
-  //     toast.success("Admin Removed Successfully");
-  //   } catch (error) {
-  //     toast.error("Something went wrong");
-  //   }
-  // };
-  useEffectAsync(async () => {
-    try {
-      const adminApi = new AdminApi();
-      const data = await adminApi.list();
-      console.log("admin data list", data.data);
-      setAdmins(data.data);
-    } catch (error) {
-      console.log(error);
-    }
+  const [students, setStudents] = useState([]);
+
+
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/student/all`
+      );
+      if (response) {
+        setStudents(response.data.data);
+      }
+    };
+    fetchStudents();
   }, []);
+
+  console.log(students);
+
   return (
-    <>
-      <div className="flex items-center justify-between p-4 mb-5 bg-white border rounded-md ">
-        <h1 className="text-xl">Admin Listing</h1>
-      </div>
-      <div className="px-4 ">
-        <div className="">
-          <table className="w-full px-6 py-3 overflow-hidden text-center rounded-lg" >
-            <thead className="">
-              <tr className="mb-10 bg-[#10b981] ">
-                <th className="w-1/3 px-5 py-2 text-start">Admin Name</th>
-                <th className="w-1/3 px-6 py-2 text-start">Admin Email</th>
-                <th className="w-1/3 py-2 pl-8 text-start">Phone No.</th>
-                <th className="w-1/3 px-6 py-2 text-start">Actions</th>
-                {/* <th className="px-16 py-2">{email}</th>
-                        <th className="px-16 py-2">{role}</th>
-                        <th className="px-16 py-2">{status}</th>
-                        <th className="px-16 py-2">{action}</th> */}
-              </tr>
-            </thead>
-          </table>
-          {admins.map((admin, index) => (
-            <table className="w-full px-6 py-3 overflow-hidden text-center rounded-lg" key={index}>
-              <tbody className="table-body ">
-                <tr className="flex items-start justify-start mt-2 border-none experts">
-                  <td className="w-1/3 px-4 py-4 text-start">{admin.username}</td>
-                  <td className="w-1/3 px-4 py-4 text-start">{admin.email}</td>
-                  <td className="w-1/3 px-4 py-4 text-start">{admin.phone}</td>
-                  <td className="flex items-center px-4 py-4">
-                    <RiDeleteBin6Line className="mr-2 text-xl border rounded-md " onClick={() => {
-                      delItem(student._id)
-                    }} />
-                    <FiEdit className="mr-2 text-xl border rounded-md" onClick={() => {
-                      updateitem(student._id)
-                    }} />
-                  </td>
+    <div className="bg-[#10b981] ">
+      <div className="table w-full">
+        <div className="flex items-center p-4 mb-5 bg-white border rounded-md ">
+          <h1 className="mr-4 text-xl">Session Listing</h1>
+        </div>
+        <div className="px-4 ">
+          <div className="">
+            <table className="w-full px-6 py-3 overflow-hidden text-center rounded-lg">
+
+
+              <thead className="bg-[#10b981]">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[6%]">
+                    S.No
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[12%]">
+                    Session Images
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[15%]">
+                    Session Name
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
+                    Category
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
+                    Subcategory
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs ffont-bold text-gray-800 uppercase tracking-wider w-[11%]">
+                    Duration
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
+                    Price
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
+                    Action
+                  </th>
                 </tr>
-              </tbody>
+              </thead>
             </table>
-          ))}
+            {students &&
+              students.map((student, index) => (
+
+                <div className="overflow-x-auto ">
+                  <table className="table">
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      <tr>
+                        <td className="px-6 py-4 whitespace-nowrap w-[6%]">
+                          {index}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap w-[12%]">
+                          <img
+                            src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"
+                            alt="Avatar Tailwind CSS Component"
+                            className="w-12 h-12 rounded-full"
+                          />
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap w-[15%]">
+                          {student.username}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap w-[11%]">
+                          Science
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap w-[11%]">
+                          subScience
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap w-[11%]">
+                          150s
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap w-[11%]">
+                          200
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap w-[11%]">
+                          <TbEdit />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default page;
+export default Student;

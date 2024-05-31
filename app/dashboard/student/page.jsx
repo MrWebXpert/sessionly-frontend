@@ -31,17 +31,17 @@ const Student = () => {
     router.push(`/dashboard/student/edit/${id}`);
   };
 
-  useEffect(() => {
-    const fetchStudents = async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/student/all`
-      );
-      if (response) {
-        setStudents(response.data.data);
-      }
-    };
-    fetchStudents();
-  }, []);
+  // useEffect(() => {
+  //   const fetchStudents = async () => {
+  //     const response = await axios.get(
+  //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/student/all`
+  //     );
+  //     if (response) {
+  //       setStudents(response.data.data);
+  //     }
+  //   };
+  //   fetchStudents();
+  // }, []);
 
   console.log(students);
 
@@ -50,12 +50,12 @@ const Student = () => {
       <div className="table w-full">
         <div className="flex items-center p-4 mb-5 bg-white border rounded-md ">
           <h1 className="mr-4 text-xl">Session Listing</h1>
-          <button
+          {/* <button
             className="bg-[#10b981] py-2 px-4 text-white rounded-md"
             onClick={() => router.push("/dashboard/student/sessioncreate")}
           >
             Add Session
-          </button>
+          </button> */}
         </div>
         <div className="px-4 ">
           <div className="">
@@ -91,7 +91,7 @@ const Student = () => {
                 </tr>
               </thead>
             </table>
-            {students &&
+            {/* {students &&
               students.map((student, index) => (
 
                 <div className="overflow-x-auto ">
@@ -130,7 +130,7 @@ const Student = () => {
                     </tbody>
                   </table>
                 </div>
-              ))}
+              ))} */}
           </div>
         </div>
       </div>

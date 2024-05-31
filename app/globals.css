@@ -200,3 +200,7 @@
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
     /* Change the color as needed */
 }
+
+.bg-clip-path {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 64%, 62% 75%, 0% 44%);
+}
