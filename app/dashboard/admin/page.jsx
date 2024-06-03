@@ -1,107 +1,91 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { TbEdit } from "react-icons/tb";
 import Table from "@/components/table/table";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { FiEdit } from "react-icons/fi";
-import { toast } from "react-toastify";
 
-const Student = () => {
+const Page = () => {
   const router = useRouter();
-  const [students, setStudents] = useState([]);
 
-
-
+  const [transections, setTranection] = useState([]);
   useEffect(() => {
-    const fetchStudents = async () => {
+    const allTransection = async () => {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/student/all`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/staff/bookings`
       );
+      console.log(response.data.data);
       if (response) {
-        setStudents(response.data.data);
+        setTranection(response.data.data);
       }
     };
-    fetchStudents();
+    allTransection();
   }, []);
-
-  console.log(students);
+  console.log(transections)
 
   return (
-    <div className="bg-[#10b981] ">
+    <div className="bg-gray-100">
       <div className="table w-full">
-        <div className="flex items-center p-4 mb-5 bg-white border rounded-md ">
-          <h1 className="mr-4 text-xl">Session Listing</h1>
+        <div className="flex items-center justify-between p-4 mb-5 bg-white border rounded-md ">
+          <h1>Transection Listing</h1>
         </div>
-        <div className="px-4 ">
+
+        <div className="px-4 bg-[#10b981] ">
           <div className="">
             <table className="w-full px-6 py-3 overflow-hidden text-center rounded-lg">
-
-
               <thead className="bg-[#10b981]">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[6%]">
+                  {/* <th className="px-6 py-3  font-bold   text-left text-xs text-gray-800 uppercase tracking-wider w-[6%]">
                     S.No
+                  </th> */}
+
+                  <th className="px-6 py-3  font-bold  text-left text-xs  text-gray-800 uppercase tracking-wider w-[15%]">
+                    Student ID
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[12%]">
-                    Session Images
+                  <th className="px-6 py-3  font-bold  text-left text-xs  text-gray-800 uppercase tracking-wider w-[11%]">
+                    Session
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[15%]">
-                    Session Name
+                  <th className="px-6 py-3  font-bold  text-left text-xs  text-gray-800 uppercase tracking-wider w-[11%]">
+                    Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
-                    Category
+                  <th className="px-6 py-3  font-bold  text-left text-xs  text-gray-800 uppercase tracking-wider w-[11%]">
+                    Time
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
-                    Subcategory
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs ffont-bold text-gray-800 uppercase tracking-wider w-[11%]">
-                    Duration
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
+                  <th className="px-6 py-3  font-bold  text-left text-xs  text-gray-800 uppercase tracking-wider w-[11%]">
                     Price
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
-                    Action
+                  <th className="px-6 py-3  font-bold  text-left text-xs  text-gray-800 uppercase tracking-wider w-[11%]">
+                    Status
                   </th>
                 </tr>
               </thead>
             </table>
-            {students &&
-              students.map((student, index) => (
-
-                <div className="overflow-x-auto ">
+            {transections &&
+              transections.map((transection, index) => (
+                <div className="overflow-x-auto">
                   <table className="table">
                     <tbody className="bg-white divide-y divide-gray-200">
                       <tr>
-                        <td className="px-6 py-4 whitespace-nowrap w-[6%]">
-                          {index}
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap w-[12%]">
-                          <img
-                            src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"
-                            alt="Avatar Tailwind CSS Component"
-                            className="w-12 h-12 rounded-full"
-                          />
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap w-[15%]">
-                          {student.username}
+                        {/* <td className="px-6 py-4 whitespace-nowrap w-[6%]">
+                          {index + 1}
+                        </td> */}
+
+                        <td className="px-6 py-4 whitespace-nowrap w-[15%] text-sm">
+                          {transection.student._id}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap w-[11%]">
-                          Science
+                          {transection.course?.title || "Not available"}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap w-[11%]">
-                          subScience
+                          {new Date(transection.bookingDate).toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap w-[11%]">
-                          150s
+                          {new Date(transection?.bookingDate || "not available").toLocaleTimeString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap w-[11%]">
-                          200
+                          $200
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap w-[11%]">
-                          <TbEdit />
+                          {transection.status}
                         </td>
                       </tr>
                     </tbody>
@@ -111,8 +95,8 @@ const Student = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
-export default Student;
+export default Page;

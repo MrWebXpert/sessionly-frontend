@@ -1,0 +1,259 @@
+"use client"
+import axios from "axios";
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+const Page = () => {
+    const [mainCategory, setMainCategory] = useState("");
+    const [subCategories, setSubCategories] = useState([]);
+    const [avatar, setAvatar] = useState(null)
+
+
+    const { id } = useParams()
+    console.log("Course id is", id)
+
+
+    const categories = {
+        fruits: ["Apple", "Banana", "Orange"],
+        vegetables: ["Carrot", "Lettuce", "Spinach"],
+    };
+
+    const handleMainCategoryChange = (e) => {
+        const selectedCategory = e.target.value;
+        setMainCategory(selectedCategory);
+        setSubCategories(categories[selectedCategory] || []);
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            category: selectedCategory,
+            subCategory: "",
+        }));
+    };
+
+    const router = useRouter();
+    const [formData, setFormData] = useState({
+        title: "",
+        description: "",
+        duration: "",
+        sessionPrice: "",
+        category: "",
+        subCategory: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleFileChange = (e) => {
+        const uploadImage = e.target.files && e.target.files[0]
+        if (uploadImage) {
+            setAvatar(uploadImage)
+        }
+
+    };
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/course/get/${id}`);
+
+                const { title, sessionPrice, subCategory, duration, description, category } = response.data.verifyCourse;
+                console.log("userdata in edit page", response.data.verifyCourse)
+                setFormData({ title, sessionPrice, subCategory, duration, description, category });
+            } catch (error) {
+                console.error("Error fetching user data", error.message);
+                toast.error("Failed to fetch user data");
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    const createSession = async (e) => {
+        e.preventDefault();
+        const fileData = new FormData()
+
+        fileData.append("image", avatar || "")
+        // fileData.set("title", formData.title)
+        // fileData.append("description", formData.description)
+        // fileData.append("duration", formData.duration)
+        // fileData.append("sessionPrice", formData.sessionPrice)
+        // fileData.append("category", formData.category)
+        // fileData.append('subCategory', formData.subCategory)
+        try {
+            console.log(formData);
+            const response = await axios.patch(
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/course/update/${id}`,
+                formData
+            );
+            console.log(response.data)
+            if (response) {
+                toast.success("Session Updated Successfully")
+                // router.push('/dashboard/session')
+            }
+        } catch (error) {
+            console.log("Error While creating Expert", error.message);
+        }
+    };
+
+
+    return (
+        <div className="p-6 bg-gray-100">
+            <h1 className="p-4 font-bold bg-white">Edit Session</h1>
+
+            <form
+                onSubmit={createSession}
+                className="flex flex-wrap justify-center my-6 gap-x-4"
+            >
+                <div className="w-1/2 mb-6">
+                    <label
+                        className="block mb-1 font-bold text-gray-500"
+                        htmlFor="inline-full-name"
+                    >
+                        Expert Name
+                    </label>
+                    <input
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#10b981]"
+                        id="inline-full-name"
+                        type="text"
+                        placeholder="Enter Seesion Title Here"
+                        name="title"
+                        required
+                        value={formData.title}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="w-1/2 mb-6">
+                    <label
+                        className="block mb-1 font-bold text-gray-500"
+                        htmlFor="inline-full-name"
+                    >
+                        Session Details
+                    </label>
+                    <textarea
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#10b981]"
+                        id="inline-full-name"
+                        rows={5}
+                        cols={5}
+                        name="description"
+                        placeholder="Enter Seesion description Here"
+
+
+                        value={formData.description}
+                        onChange={handleChange}
+                    ></textarea>
+                </div>
+
+                <div className="w-1/2 mb-6">
+                    <label
+                        htmlFor="main-category"
+                        className="block mb-1 font-bold text-gray-500"
+                    >
+                        Main Category:
+                    </label>
+                    <select
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#10b981]"
+                        id="main-category"
+                        name="category"
+                        value={mainCategory}
+                        onChange={handleMainCategoryChange}
+                    >
+                        <option value="">Select a category</option>
+                        {Object.keys(categories).map((category) => (
+                            <option key={category} value={category}>
+                                {category.charAt(0).toUpperCase() + category.slice(1)}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="w-1/2 mb-6">
+                    <label
+                        htmlFor="sub-category"
+                        className="block mb-1 font-bold text-gray-500"
+                    >
+                        Sub Category:
+                    </label>
+                    <select
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#10b981]"
+                        id="sub-category"
+                        name="subCategory"
+                        required
+                        value={formData.subCategory}
+                        onChange={handleChange}
+                        disabled={!mainCategory}
+                    >
+                        <option value="">Select a sub-category</option>
+                        {subCategories.map((subCategory) => (
+                            <option key={subCategory} value={subCategory.toLowerCase()}>
+                                {subCategory}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="w-1/2 mb-6">
+                    <label
+                        className="block mb-1 font-bold text-gray-500"
+                        htmlFor="inline-full-name"
+                    >
+                        Duration
+                    </label>
+                    <input
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#10b981]"
+                        id="inline-full-name"
+                        type="text"
+                        placeholder="Enter Duration"
+                        name="duration"
+                        required
+                        value={formData.duration}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="w-1/2 mb-6">
+                    <label
+                        className="block mb-1 font-bold text-gray-500"
+                        htmlFor="inline-full-name"
+                    >
+                        Price
+                    </label>
+                    <input
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#10b981]"
+                        id="inline-full-name"
+                        type="number"
+                        placeholder="Enter Price"
+                        name="sessionPrice"
+                        required
+                        value={formData.sessionPrice}
+                        onChange={handleChange}
+                    />
+                </div>
+                {/* <div className="w-1/2 mb-6">
+                    <label
+                        className="block mb-1 font-bold text-gray-500"
+                        htmlFor="inline-full-name"
+                    >
+                        Upload your image:
+                    </label>
+                    <input
+                        className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#10b981]"
+                        id="file"
+                        type="file"
+                        name="file"
+
+                        onChange={handleFileChange}
+                    />
+                </div> */}
+
+                <div className="flex justify-end w-full mx-auto">
+                    <button className="bg-[#10b981] text-white font-bold py-2 px-3 mt-3 border border-[#10b981] rounded">
+                        Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+};
+
+export default Page;

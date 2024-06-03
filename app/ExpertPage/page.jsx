@@ -2,10 +2,12 @@
 import Navbar from "@/components/Navbar";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const TeacherCard = () => {
     const [experts, setExperts] = useState([]);
+    const router = useRouter()
 
     useEffect(() => {
         const allExpert = async () => {
@@ -133,7 +135,7 @@ const TeacherCard = () => {
                                     <h2 className="text-lg font-semibold">{expert?.username || "Not Available"}</h2>
                                     <span className="mt-1 text-green-500 md:mt-0">&#x2714;</span>
                                 </div>
-                                <p className="text-sm text-gray-500">{expert?.teacherType || "ProfessionalTeacher"}</p>
+                                <p className="text-sm text-gray-500">{expert?.teacherType || "Not Available"}</p>
                                 <div className="flex items-center justify-center mt-2 md:justify-start">
                                     <span className="text-yellow-400">&#9733;</span>
                                     <span className="ml-1 text-sm font-semibold">5.0</span>
@@ -142,22 +144,8 @@ const TeacherCard = () => {
                                 <div className="flex flex-wrap items-center justify-center mt-2 text-sm text-gray-600 md:justify-start">
                                     <span className="font-semibold">SPEAKS :</span>
                                     <span className="flex items-center ml-1">
-                                        <span className="ml-1">English</span>
+                                        <span className="ml-1">{expert?.languageofEpert || "Not Available"}</span>
                                         <span className="ml-1">||||</span>
-                                    </span>
-                                    <span className="flex items-center ml-1">
-                                        <span className="ml-1">French</span>
-                                        <span className="px-1 ml-1 text-blue-800 bg-blue-100 rounded">
-                                            Native
-                                        </span>
-                                    </span>
-                                    <span className="flex items-center ml-1">
-                                        <span className="ml-1">Spanish</span>
-                                        <span className="ml-1">||||</span>
-                                    </span>
-                                    <span className="flex items-center ml-1">
-                                        <span className="ml-1">Italian</span>
-                                        <span className="ml-1">|||</span>
                                     </span>
                                     <span className="ml-1">+3</span>
                                 </div>
@@ -167,10 +155,10 @@ const TeacherCard = () => {
                                     mistakes are part of the process and...
                                 </p>
                                 <div className="flex flex-col items-center justify-between mt-4 md:flex-row">
-                                    <span className="text-lg font-semibold">
+                                    {/* <span className="text-lg font-semibold">
                                         USD 60.00 <span className="text-sm font-normal">/ trial</span>
-                                    </span>
-                                    <button className="px-4 py-2 mt-2 text-white bg-blue-500 rounded md:mt-0">
+                                    </span> */}
+                                    <button className="px-4 py-2 mt-2 text-white bg-blue-500 rounded md:mt-0" onClick={() => { router.push(`/Expertlisting/${expert._id}`) }}>
                                         Book trial
                                     </button>
                                 </div>

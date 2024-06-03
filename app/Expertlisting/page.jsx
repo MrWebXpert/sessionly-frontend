@@ -110,7 +110,7 @@ function Expertlisting() {
                                             <p className="mb-2 leading-4 text-gray-500 font-sm">
                                                 Session start from: {formatAvailability(expert?.availability.startTime || "Not Available")}
                                             </p>
-                                            <p className="text-base font-semibold text-gray-500">USD: {expert?.sessionPrice || 0}$</p>
+                                            {/* <p className="text-base font-semibold text-gray-500">USD: {expert?.sessionPrice || 0}$</p> */}
                                         </div>
                                     </div>
                                 </div>

@@ -9,27 +9,27 @@ import { FiEdit } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 const Student = () => {
-  const router = useRouter();
-  const [students, setStudents] = useState([]);
+  // const router = useRouter();
+  // const [students, setStudents] = useState([]);
 
-  const delItem = async (id) => {
-    try {
-      const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/student/delete/${id}`
-      );
-      console.log("stall deleted and", response.data);
-      setStudents((students) =>
-        students.filter((student) => student._id !== id)
-      );
-      toast.success(response.data.message);
-    } catch (error) {
-      console.log(error);
-      // toast.error(response.data.message)
-    }
-  };
-  const updateitem = (id) => {
-    router.push(`/dashboard/student/edit/${id}`);
-  };
+  // const delItem = async (id) => {
+  //   try {
+  //     const response = await axios.delete(
+  //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v2/student/delete/${id}`
+  //     );
+  //     console.log("stall deleted and", response.data);
+  //     setStudents((students) =>
+  //       students.filter((student) => student._id !== id)
+  //     );
+  //     toast.success(response.data.message);
+  //   } catch (error) {
+  //     console.log(error);
+  //     // toast.error(response.data.message)
+  //   }
+  // };
+  // const updateitem = (id) => {
+  //   router.push(`/dashboard/student/edit/${id}`);
+  // };
 
   // useEffect(() => {
   //   const fetchStudents = async () => {
@@ -43,13 +43,13 @@ const Student = () => {
   //   fetchStudents();
   // }, []);
 
-  console.log(students);
+  // console.log(students);
 
   return (
     <div className="bg-[#10b981] ">
       <div className="table w-full">
         <div className="flex items-center p-4 mb-5 bg-white border rounded-md ">
-          <h1 className="mr-4 text-xl">Session Listing</h1>
+          {/* <h1 className="mr-4 text-xl">Session Listing</h1> */}
           {/* <button
             className="bg-[#10b981] py-2 px-4 text-white rounded-md"
             onClick={() => router.push("/dashboard/student/sessioncreate")}
@@ -59,7 +59,7 @@ const Student = () => {
         </div>
         <div className="px-4 ">
           <div className="">
-            <table className="w-full px-6 py-3 overflow-hidden text-center rounded-lg">
+            {/* <table className="w-full px-6 py-3 overflow-hidden text-center rounded-lg">
 
 
               <thead className="bg-[#10b981]">
@@ -90,7 +90,7 @@ const Student = () => {
                   </th>
                 </tr>
               </thead>
-            </table>
+            </table> */}
             {/* {students &&
               students.map((student, index) => (
 
@@ -131,6 +131,8 @@ const Student = () => {
                   </table>
                 </div>
               ))} */}
+
+            <h1 className="text-center">Welcome to Dashboard</h1>
           </div>
         </div>
       </div>

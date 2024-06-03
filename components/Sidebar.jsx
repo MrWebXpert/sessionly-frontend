@@ -32,8 +32,11 @@ const Sidebar = () => {
                 items = [
                     { name: "Dashboard", href: "/dashboard", icon: AiOutlineHome },
                     { name: "transection", href: "/dashboard/experts", icon: TiContacts },
+
                     // { name: "Courses", href: "/dashboard/course", icon: IoCreate },
                     // { name: "Task", href: "/dashboard/task", icon: FaTasks },
+                    { name: "Student Listing", href: "/dashboard/admin/studentlisting", icon: TiContacts },
+                    { name: "Staff Listing", href: "/dashboard/admin/stafflisting", icon: TiContacts },
                     { name: "BookedSessions", href: "/dashboard/courseBooking", icon: FaBook },
                     { name: "Profile", href: "/dashboard/admin/profile", icon: CgProfile },
 

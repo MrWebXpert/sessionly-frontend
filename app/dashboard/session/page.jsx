@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { TbEdit } from "react-icons/tb";
 import { useRouter } from "next/navigation";
+import { CiEdit } from "react-icons/ci";
 import axios from "axios";
 const Student = () => {
     const router = useRouter();
@@ -63,6 +63,9 @@ const Student = () => {
                                         Price
                                     </th>
                                     <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
+                                        Action
+                                    </th>
+                                    <th className="px-6 py-3 text-left text-xs font-bold  text-gray-800 uppercase tracking-wider w-[11%]">
                                         Image
                                     </th>
                                 </tr>
@@ -77,13 +80,7 @@ const Student = () => {
                                             <td className="px-6 py-4 whitespace-nowrap w-[6%]">
                                                 {index + 1}
                                             </td>
-                                            {/* <td className="px-6 py-4 whitespace-nowrap w-[12%]">
-                                                <img
-                                                    src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png"
-                                                    alt="Avatar Tailwind CSS Component"
-                                                    className="w-12 h-12 rounded-full"
-                                                />
-                                            </td> */}
+
                                             <td className="px-6 py-4 whitespace-nowrap w-[15%]">
                                                 {session.title}
                                             </td>
@@ -101,7 +98,10 @@ const Student = () => {
 
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap w-[11%]">
-                                                <img src={session.image} alt="session image" />
+                                                <CiEdit onClick={() => { router.push(`/dashboard/session/edit/${session._id}`) }} />
+                                            </td>
+                                            <td className="px-6 py-4 whitespace-nowrap w-[11%]">
+                                                <img src={session.image} alt="session image" className="w-2/5 rounded-full h-2/5" />
                                             </td>
                                         </tr>
                                     </tbody>
